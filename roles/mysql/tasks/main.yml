@@ -1,0 +1,15 @@
+---
+- name: 'Cria container do MySQL'
+  docker_container:
+    name: mysql
+    image: mysql:5.5
+    state: started
+    networks:
+      - name: cluster_network
+    volumes:
+      - /home/webuser/pv-mysql:/var/lib/mysql
+    env:
+      MYSQL_ROOT_PASSWORD: root12345
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
