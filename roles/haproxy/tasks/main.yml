@@ -1,0 +1,17 @@
+---
+- name: 'Cria container do haproxy'
+  docker_container:
+    name: haproxy
+    image: dockercloud/haproxy
+    state: started
+    networks:
+      - name: cluster_network
+    ports:
+      - 8080:80
+    links:
+     - wordpress:wordpress
+     - wordpress2:wordpress2
+    env:
+      BALANCE: source
+      MODE: tcp
+      OPTION: tcplog
