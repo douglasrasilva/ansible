@@ -1,5 +1,5 @@
 ---
-- name: 'Instala as dependências do Docker'
+- name: 'Instala as dependencias do Docker'
   yum:
     name: "{{ packages }}"
     state: latest
