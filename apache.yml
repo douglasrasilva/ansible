@@ -1,0 +1,23 @@
+- hosts: apache
+  handlers:
+    - name: restart apache
+      service:
+        name: httpd
+        state: restarted
+      become: yes
+
+  tasks:
+    - name: 'Pegando o nome do servidor'
+      shell: hostname
+      register: hostname
+    - debug: msg={{ hostname.stdout }}
+      become: yes
+
+    - name: 'Configura o httpd.conf'
+      template:
+        src: 'templates/httpd.conf.j2'
+        dest: '/etc/httpd/conf/httpd.conf'
+        backup: yes
+      become: yes
+      notify:
+        - restart apache
