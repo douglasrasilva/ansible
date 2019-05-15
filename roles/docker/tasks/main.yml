@@ -1,0 +1,63 @@
+---
+- name: 'Instala as dependências do Docker'
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+
+- name: 'Adiciona repositório do Docker'
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: 'Habilita repositório de teste do Docker'
+  ini_file:
+    dest: /etc/yum.repos.d/docker-ce.repo
+    section: 'docker-ce-test'
+    option: enabled
+    value: 0
+
+- name: 'Baixando o repositorio Epel'
+  get_url:
+    url: http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    dest: /home/douglas/epel-release-latest-7.noarch.rpm
+
+- name: 'Baixando container-selinux-2.9-4'
+  get_url:
+    url: ftp://ftp.icm.edu.pl/vol/rzm6/linux-centos-vault/7.3.1611/extras/x86_64/Packages/container-selinux-2.9-4.el7.noarch.rpm
+    dest: /home/douglas/container-selinux-2.9-4.el7.noarch.rpm
+
+- name: 'Instala os pacotes: epel, container-selinux, docker e containerd'
+  yum:
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - epel-release-latest-7.noarch.rpm
+    - container-selinux-2.9-4.el7.noarch.rpm
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+
+- name: 'Instala o pacote python-pip'
+  yum:
+    name: python-pip
+    state: latest
+
+- name: 'Instala o Docker Compose'
+  pip:
+    name: docker-compose
+    state: latest
+
+- name: 'Inicia o serviço do Docker'
+  service:
+    name: docker
+    state: started
+
+- name: 'Criando uma rede no Docker'
+  docker_network:
+    name: cluster_network
