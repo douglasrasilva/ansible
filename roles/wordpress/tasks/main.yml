@@ -1,0 +1,34 @@
+---
+- name: 'Cria primeiro container do Wordpress'
+  docker_container:
+    name: wordpress
+    image: wordpress
+    state: started
+    ports:
+     - 8081:80
+    networks:
+      - name: cluster_network
+    volumes:
+      - /home/webuser/pv-wordpress:/var/www/html
+    env:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+
+- name: 'Cria segundo container do Wordpress'
+  docker_container:
+    name: wordpress2
+    image: wordpress
+    state: started
+    ports:
+     - 8082:80
+    networks:
+      - name: cluster_network
+    volumes:
+      - /home/webuser/pv-wordpress:/var/www/html
+    env:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
