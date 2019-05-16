@@ -75,9 +75,10 @@ EnableSendfile on
 IncludeOptional conf.d/*.conf
 
 ##### Template #####
-Alias /healthcheck/ "/home/webuser/healthcheck/"
 
-<Directory "/home/webuser/healthcheck/">
+Alias /healthcheck "/usr/share/httpd/noindex/"
+
+<Directory "/usr/share/httpd/noindex/">
     Options None
     AllowOverride None
     DirectoryIndex alive.htm
