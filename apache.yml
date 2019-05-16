@@ -7,10 +7,10 @@
       become: yes
 
   tasks:
-    - name: 'Pegando o nome do servidor'
-      shell: hostname
-      register: hostname
-    - debug: msg={{ hostname.stdout }}
+    - name: 'Copiando o alive.htm'
+      template:
+        src: 'templates/alive.htm.j2'
+        dest: '/usr/share/httpd/noindex/alive.htm'
       become: yes
 
     - name: 'Configura o httpd.conf'
