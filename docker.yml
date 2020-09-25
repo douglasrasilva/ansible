@@ -13,7 +13,7 @@
         state: latest
       vars:
         packages:
-	- epel-release
+        - epel-releases
         - docker-ce
         - docker-ce-cli
         - containerd.io
