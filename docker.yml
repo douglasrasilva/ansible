@@ -17,12 +17,12 @@
         - docker-ce
         - docker-ce-cli
         - containerd.io
-		
+
     - name: 'Instala o pacote python2-pip'
       yum:
         name: python2-pip
         state: latest
-	
+
     - name: 'Upgrade do pip'
       shell: pip install --upgrade pip
       
