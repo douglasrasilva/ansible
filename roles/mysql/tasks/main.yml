@@ -7,7 +7,7 @@
     networks:
       - name: cluster_network
     volumes:
-      - /home/webuser/pv-mysql:/var/lib/mysql
+      - /root/pv-mysql:/var/lib/mysql
     env:
       MYSQL_ROOT_PASSWORD: root12345
       MYSQL_DATABASE: wordpress
