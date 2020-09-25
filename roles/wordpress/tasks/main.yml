@@ -9,7 +9,7 @@
     networks:
       - name: cluster_network
     volumes:
-      - /home/webuser/pv-wordpress:/var/www/html
+      - /root/pv-wordpress:/var/www/html
     env:
       WORDPRESS_DB_HOST: mysql:3306
       WORDPRESS_DB_USER: wordpress
@@ -26,7 +26,7 @@
     networks:
       - name: cluster_network
     volumes:
-      - /home/webuser/pv-wordpress:/var/www/html
+      - /root/pv-wordpress:/var/www/html
     env:
       WORDPRESS_DB_HOST: mysql:3306
       WORDPRESS_DB_USER: wordpress
